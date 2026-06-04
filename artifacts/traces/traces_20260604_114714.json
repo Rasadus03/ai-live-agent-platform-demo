@@ -1,0 +1,989 @@
+{
+  "eval_cases": [
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Who is the target audience for Lavender Sea Salt Chocolate?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "The target audience for Lavender Sea Salt Chocolate is primarily composed of **Gourmet Connoisseurs and Experience Seekers** who are willing to pay a premium for unique, complex, and high-quality flavor profiles.\n\nBased on the product description (rich **dark chocolate**, **aromatic lavender**, delicate **sea salt**) and customer insights, the potential buyer groups are:\n\n### 1. The Gourmet Connoisseur & Foodie\n\n*   **Profile:** Discerning palates who prioritize quality and complex flavors. They are educated consumers who seek out artisanal and unique food experiences.\n*   **Reasoning:**\n    *   **Dark Chocolate & Sea Salt Preference:** Customer insights show a segment of buyers who actively seek the contrast of salt in their routine (e.g., adding a pinch of sea salt to coffee grounds). This indicates a sophisticated taste that enjoys the balance of sweet, bitter, and salty.\n    *   **Willingness to Pay for Quality:** The \"decadent\" description and premium ingredients appeal to customers who are \"medium spenders\" and \"loyal coffee lovers\" who are willing to invest in quality products.\n*   **Marketing Angle:** Emphasize the origin of the dark chocolate, the delicate balance of the flavor profile, and suggest pairings (e.g., with fine wine or artisanal coffee).\n\n### 2. The Creative & Artisan Customer\n\n*   **Profile:** Individuals with creative, craft-focused, or independent lifestyles (e.g., freelance artisans, bakers, designers, DIY enthusiasts). They value unique ingredients, natural elements, and aesthetically pleasing products.\n*   **Reasoning:**\n    *   **Lavender Appeal:** Lavender is an unconventional, natural, and sophisticated flavor that strongly resonates with customers interested in aromatherapy, natural ingredients, and creative pursuits (like the artisan baker or carpenter mentioned in the data).\n    *   **Aesthetic Alignment:** These buyers are often active on visual platforms (Instagram, Facebook) and are drawn to products that are unique and photograph well.\n*   **Marketing Angle:** Use visually appealing content that highlights the natural beauty of the lavender and the product's handcrafted, artisanal nature. Suggest the chocolate as a sophisticated ingredient for baking or a unique gift.\n\n### 3. The Experience Seeker & Digital Nomad\n\n*   **Profile:** Travelers, digital nomads, and experience-driven customers who are always looking for a unique \"treat\" or souvenir that captures a sense of place or novelty.\n*   **Reasoning:**\n    *   **Novelty and Travel:** The combination of \"Lavender Sea Salt\" is distinctive and memorable. Experience-seekers (who are frequently cited in the data as valuing travel and unique products) are drawn to novel items that stand out from conventional offerings.\n    *   **Premium Indulgence:** This chocolate is an ideal, high-quality, and easy-to-transport indulgence for their \"on-the-go\" lifestyle.\n*   **Marketing Angle:** Position the product as a luxurious, unique treat for travel or a sophisticated snack for a mid-day ritual. Highlight the experience of the taste over basic functionality."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "lavender_sea_salt",
+      "agent_data": {
+        "agents": {
+          "target_audience_identifier": {
+            "agent_id": "target_audience_identifier",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "\nYou are the Target Audience Identifier agent for Chocolate AI. \nYour goal is to identify potential buyer groups for specific chocolate products using data from BigQuery.\n\nFollow these steps:\n1. When a user asks about a product, use the `get_product_details` tool to find its description and price.\n2. Extract key flavor profiles, ingredients, or categories from the product details (e.g., 'dark chocolate', 'sea salt', 'organic').\n3. Use the `get_customer_insights` tool with these keywords to find relevant customer segments and marketing insights from the `customer_360` table.\n4. Synthesize the findings and output a list of potential buyer groups.\n5. For each buyer group, provide a clear reasoning based on the customer insights and product details.\n\nSafety Rules:\n- Never disclose PII (Personal Identifiable Information) like customer names or IDs.\n- Only provide segment-level insights and general demographic reasoning.\n- Focus exclusively on target audience identification for chocolate products.\n",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves chocolate product details from the menu based on a search string.\n\nArgs:\n    product_search: Name or description of the product to search for.",
+                    "name": "get_product_details",
+                    "parameters": {
+                      "properties": {
+                        "product_search": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "product_search"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves customer segments and marketing insights based on flavor preferences or product types.\n\nArgs:\n    preferences: A list of keywords like ['dark chocolate', 'sea salt', 'almonds'].",
+                    "name": "get_customer_insights",
+                    "parameters": {
+                      "properties": {
+                        "preferences": {
+                          "items": {
+                            "type": "STRING"
+                          },
+                          "type": "ARRAY"
+                        }
+                      },
+                      "required": [
+                        "preferences"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-e97eeb79-253d-41f7-90cf-7026eae6f99f",
+                        "args": {
+                          "product_search": "Lavender Sea Salt Chocolate"
+                        },
+                        "name": "get_product_details"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-e97eeb79-253d-41f7-90cf-7026eae6f99f",
+                        "name": "get_product_details",
+                        "response": {
+                          "result": [
+                            {
+                              "menu_id": 15,
+                              "menu_name": "Lavender Sea Salt Chocolate",
+                              "menu_description": "A decadent blend of rich dark chocolate infused with aromatic lavender, topped with a sprinkle of delicate sea salt.",
+                              "menu_price": 5.5
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-35d1ccf9-c50d-4e7e-af64-48e64bd02215",
+                        "args": {
+                          "preferences": [
+                            "dark chocolate",
+                            "lavender",
+                            "sea salt"
+                          ]
+                        },
+                        "name": "get_customer_insights"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-35d1ccf9-c50d-4e7e-af64-48e64bd02215",
+                        "name": "get_customer_insights",
+                        "response": {
+                          "result": [
+                            {
+                              "customer_marketing_insights": "This 18 year old male customer is a freelance Esports Journalist and Tech Reviewer. He is a Gen Z, single, high school graduate. He enjoys video games, esports, technology, coffee brewing, and Indie Music. He actively uses Instagram, Twitter, and TikTok, where he frequently engages with content related to new tech gadgets, video games, and esports. He identifies as a digital nomad and describes himself as tech-savvy. He is an active and frequent buyer, with an average spend of $29.11 per order. His preferred coffee is strong French Roast made using a French Press with robusta beans. He adds a pinch of sea salt to his grounds.  He buys coffee online in bulk every two weeks and occasionally tries new blends based on online reviews, stocking up on his favorite French Roast. Although he is a repeat customer who has placed multiple orders and tried multiple products, he left a negative review on his last order on 2024-09-18, indicating some dissatisfaction. To improve his experience, focus on consistent quality and explore offering promotions tailored to his interest in new coffee blends. Highlighting the robust flavor and high caffeine content of your French Roast offerings, particularly on platforms like Instagram, Twitter, and TikTok where he is most active, would likely resonate with him. Additionally, given his \"digital nomad\" lifestyle, emphasize the convenience and portability of your coffee products. ",
+                              "chocolate_preferences": null,
+                              "interests": "Technology",
+                              "lifestyle": "Tech-Savvy",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "112,5,162"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst - ID: 5186\n\n**This 20-year-old freelance carpenter from San Jose is a coffee enthusiast with a passion for photography, travel, and urban exploration. He represents a valuable customer segment for targeted marketing campaigns.** \n\n**Key Highlights:**\n\n* **Coffee Lover:**  He's highly engaged with coffee, experimenting with brewing methods, preferring strong South American roasts, and adding sea salt to his grounds. He regularly buys fresh beans and enjoys specialty coffee on camping trips. Target him with premium coffee beans, brewing equipment, and exclusive coffee experiences. \n* **Active Lifestyle:**  He's into photography, hiking, and exploring cities. This suggests a preference for brands aligning with his active and adventurous lifestyle. Consider promoting travel-related coffee accessories, outdoor brewing gear, and collaborations with photography brands.\n* **Social Media Savvy:** Highly active on Instagram, TikTok, and Twitter, showcasing his photography and coffee experiences. Leverage these platforms for targeted ads, influencer marketing campaigns, and engaging content featuring urban exploration or coffee brewing. \n* **Value-Driven:**  He's a \"medium spender\" willing to pay for quality coffee. Highlight the value proposition of your products, emphasizing factors like bean origin, roasting techniques, and unique flavor profiles. \n* **DIY & Home Improvement:**  His engagement with DIY content and his profession as a carpenter present an opportunity to cross-promote products related to home brewing setups, coffee bar accessories, or DIY coffee recipes.\n\n**Recommendations:** \n\n* **Personalized Content:**  Craft marketing messages showcasing high-quality coffee experiences tailored to his interests in urban exploration, travel, and photography. \n* **Visual Storytelling:**  Leverage his passion for photography by using visually appealing content that resonates with his artistic side.\n * **Community Building:**  Engage with him on social media, fostering a sense of community among coffee lovers and promoting user-generated content.\n* **Exclusive Offers:**  Target him with special discounts on premium coffee beans, brewing equipment upgrades, or limited-edition coffee blends that cater to his adventurous palate.  ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "204,25,170"
+                            },
+                            {
+                              "customer_marketing_insights": "Jovita is a 31-year-old skilled carpenter and furniture restorer based in Spain. She embodies a creative, independent, and adventurous lifestyle, evident in her passion for woodworking, crafting, sustainable living, and exploring her city.  As a coffee enthusiast, she enjoys high-quality, intense, and smoky coffees with notes of dark chocolate and roasted nuts. She buys freshly roasted beans every two weeks and enjoys a cup daily, often sharing with friends in her workshop. \n\nJovita is an active Instagram user (@Jovitas_Crafts_and_Coffee), showcasing her handcrafted creations and coffee-fueled adventures. She is also active on Facebook, engaging with content related to DIY, crafting, sustainable living, travel, and adventure. Her online presence suggests a strong affinity for visually appealing content and storytelling. \n\nAs a repeat customer, Jovita has spent over \\$5000 on 79 orders, reflecting a high customer lifetime value. Her average spend per order is \\$26.39.  She appreciates quality and is a frequent buyer, demonstrating loyalty to brands that align with her values. \n\nMarketing efforts should leverage Jovita's interests to engage her effectively. High-quality visuals showcasing artisanal coffee, brewing equipment, or unique coffee experiences would resonate with her creative and adventurous spirit. Content highlighting the sustainable and ethical sourcing of coffee beans could pique her interest in sustainable living. Collaborations with influencers or artisans in the woodworking or crafting space could further enhance engagement and brand affinity. Since she is an active Instagram user, visual platforms are ideal for reaching her. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "187,11,213"
+                            },
+                            {
+                              "customer_marketing_insights": "Fiona Riley is a 33-year-old freelance laborer who enjoys a moderately active lifestyle centered around her passions for DIY upcycling, travel, and coffee. As a single, Millennial woman with a high school diploma, she embodies the characteristics of an independent, creative spirit.  Fiona identifies as a \"#DIYQueen\" and \"#UpcycleAddict,\" showcasing her passion for sustainable living through furniture restoration and attending local craft markets. Her social media activity reveals a strong online presence, particularly on Instagram (\"FionaRiley_UpcycledLife\") where she actively shares her creations and travel experiences.  When it comes to coffee, Fiona prefers a medium roast prepared with her French press, often adding a pinch of sea salt. Her purchase history highlights her as a medium spender with a tendency for weekend treats, special occasion indulgences, and strategic bulk purchases during online sales. Notably, she values convenience, seeking quick and easy coffee solutions as evidenced by her aversion to long lines at traditional coffee shops.  Fiona's engagement with our brand positions her as a repeat customer with 64 orders to date, signifying a considerable brand affinity.  Key takeaways for a successful marketing approach: - Emphasize the convenience and quality of your products to align with Fiona's preferences. - Leverage her interest in sustainability by highlighting eco-friendly initiatives or product lines. - Explore potential collaborations with local craft markets or DIY workshops she frequents. - Target her with visually appealing content showcasing travel experiences and coffee rituals on Instagram. - Consider offering special promotions or discounts for bulk purchases to incentivize repeat orders.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "247,133,241"
+                            },
+                            {
+                              "customer_marketing_insights": "Charline is a 36-year-old freelance translator & interpreter and digital nomad who is passionate about travel, photography, and foreign languages. As a minimalist and experience seeker with a high engagement in social media, she is actively present on Facebook, Instagram, and Twitter, documenting her journeys and sharing her experiences with the world.  She is a medium spender, making frequent purchases while traveling and on special occasions. She values quality and experience, is willing to pay for premium products and is interested in sustainable options. Charline is an active coffee enthusiast, often seeking high-quality coffee during her travels. She enjoys a strong Swiss Water Processed Espresso, a double-walled glass French Press, and a mid-morning ritual with dark chocolate pairings. Providing her with premium, sustainable coffee options tailored to her on-the-go lifestyle could be the key to turning her into a loyal customer.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel,Photography,Foreign Languages,Sustainable Living",
+                              "lifestyle": "Digital Nomad,Minimalist,Experience Seeker",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "60,249,12"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst:\n\n**Customer ID:** 8\n\n**Denise is a loyal, mid-spending customer and active coffee drinker (66 orders, $2168.93 total spend) interested in quality and ethical sourcing.** She frequently engages with our brand online and  is receptive to marketing efforts targeting her interests.\n\n**Key characteristics:**\n* **Eco-conscious & Ethical Consumer:**  Seeks information about sustainable living and ethical sourcing, enjoys documentaries on related topics. Highlight our commitment to these values.\n* **Family-Oriented & Education Professional:** Mother to a 7-year-old daughter, works part-time as an art teacher, and values education. Content related to family-friendly activities, creativity, or supporting educators could resonate.\n* **Active Social Media User (Facebook, Instagram, Twitter):**  Engages with our content, particularly around educational and sustainable living themes. Leverage these platforms for targeted campaigns and promotions.\n* **Enjoys trying new things:** Open to new experiences, as evidenced by her interest in travel, pottery, and volunteering. Suggest new products like limited-edition coffee blends or single-origin offerings.\n* **Values Quality:** Willing to spend for quality products. Emphasize the premium nature of our coffee and its origins.\n\n**Potential Marketing Strategies:**\n* **Content Marketing:** Share blog posts, articles, or videos about ethical sourcing, sustainable living, or coffee origins. Highlight the educational aspects of coffee production or brewing methods.  \n* **Social Media Engagement:** Run targeted campaigns showcasing new offerings, limited-time promotions, or ethically sourced products. Organize contests or giveaways aligned with her interests (e.g., travel-themed coffee sets).\n* **Email Marketing:** Segment email campaigns based on her purchase history and interests. Offer exclusive discounts on her favorite products or suggestions for complementary items (e.g., new grinder, dark chocolate pairings).\n* **Community Building:** Invite her to participate in online or in-person events related to coffee, sustainability, or education.  This could foster brand loyalty and provide opportunities for direct engagement.\n\n**Overall, Denise represents a valuable customer segment. By understanding her values, interests, and online behavior, we can tailor marketing efforts to effectively resonate with her and encourage repeat purchases.**",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Family-oriented",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "7,236,30"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for ID 10097\n\n**This customer is At-Risk, despite being a Repeat Buyer who values Quality. He recently left his first negative review.** Focus on addressing his concerns and highlighting our commitment to customer satisfaction to prevent churn.\n\n**Customer Profile:**\n* **Demographics:** 48-year-old married male with three young children (twin 8-year-old girls and a 10-year-old son).\n* **Profession:** Part-time English as a Second Language (ESL) teacher; likely seeking additional income opportunities.\n* **Interests:** Passionate about travel (especially Latin America), photography, languages (fluent in English, Spanish, and Portuguese), and ancient history.  Enjoys learning new languages and exploring new cultures. Active on social media, particularly Facebook, Instagram, and Twitter. \n* **Coffee Habits:** Coffee enthusiast who regularly purchases specialty beans for himself and as gifts.  Enjoys trying local coffee while traveling. Prefers Cortado, intensely roasted beans with dark chocolate notes.\n\n**Marketing Opportunities:**\n* **Address Negative Review:** Investigate and rectify the source of the negative review.  Personalized outreach and a small gift could demonstrate commitment to his satisfaction. \n* **Leverage Love for Travel:** Highlight coffee beans from Latin America or regions that align with his travel interests. Promote travel-themed coffee experiences or partnerships with travel companies. \n* **Personalized Recommendations:** Suggest coffee brewing equipment, such as a traditional Spanish cafetera. Recommend language learning resources related to coffee or travel destinations.\n* **Content Marketing:** Share blog posts, articles, or social media content about the history and cultural significance of coffee in Latin America. Feature customer stories or travelogues from coffee-producing regions. \n* **Family-Oriented Promotions:** Consider promotions or product bundles that cater to families or offer gifts for coffee-loving friends.\n* **Highlight Educational Aspect:** Promote ethically sourced coffee or partner with organizations that support education in coffee-producing communities. This aligns with his profession and values. \n",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Family-oriented",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "178,179,123"
+                            },
+                            {
+                              "customer_marketing_insights": "Diane is a loyal customer and moderate user in the 45-54 age range, who appreciates high-quality coffee and is willing to pay a premium for it, especially for special occasions and gifts.  She is a single, freelance event and hospitality worker, suggesting a busy lifestyle.  Targeting her with marketing related to convenient, high-quality coffee options, potentially single-serve and travel-friendly, would likely resonate with her. She is active on Facebook, enjoys written content like articles and blog posts, and is an amateur photographer, making visually appealing ads featuring customer testimonials or stories related to travel and exploration a good approach. Emphasize the origins and unique flavor profiles of the coffee beans, especially those from Africa with notes of dark chocolate and cherry, aligning with her preference for independent roasters and bold flavors.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Independent",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "29,45,117"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for ID 9705 - Aimé Guillou:\n\n**Aimé is a high-value target for our marketing efforts. He is a loyal, repeat customer with moderate spending habits and above-average engagement.** He actively interacts with our brand online (Facebook, Instagram) and appreciates quality coffee experiences.\n\n**Key Characteristics:**\n\n* **Family-oriented, outdoor enthusiast:** Aimé is a proud father of two young daughters and enjoys camping, photography, and exploring the French countryside. This suggests a preference for family-friendly products and experiences, possibly related to outdoor coffee brewing and enjoyment.\n* **Coffee aficionado:** Aimé is very particular about his coffee, preferring robusta beans from Vietnam brewed in a French Press with a pinch of sea salt. This highlights his discerning taste and willingness to invest time and effort into a quality cup of coffee.\n* **DIY and sustainability focus:**  He engages with DIY content, enjoys woodworking, and describes himself as passionate about sustainable living. This suggests he appreciates craftsmanship, natural materials, and potentially eco-friendly products.\n* **Active on social media:** Aimé is an active Facebook and Instagram user, primarily showcasing his photography and outdoor lifestyle. Leverage visually appealing content that aligns with his interests to capture his attention.\n* **Potentially budget-conscious:** As a freelance handyman, Aimé might be price-sensitive. Emphasize value propositions like quality, durability, and unique experiences to justify purchasing decisions.\n\n**Marketing Strategies:**\n\n* **Content Marketing:** Tailor content around family-friendly outdoor adventures featuring high-quality coffee moments. Consider blog posts, videos, or social media campaigns highlighting recipes, brewing tips, and scenic locations.\n* **Product Recommendations:** Suggest premium robusta coffee beans from Vietnam, French Presses, travel coffee kits, and sustainable coffee accessories. Highlight the craftsmanship, origin story, and ethical sourcing of these products. \n* **Partnerships:** Collaborate with outdoor gear brands or family-friendly camping sites to offer promotions and cross-promote products/experiences that resonate with Aimé's interests.\n* **Community Building:** Encourage user-generated content by featuring Aimé's photography or engaging with his posts. Foster a sense of community among like-minded coffee lovers interested in similar activities.\n* **Target his wife:** Although we lack data on her, Aimé enjoys evening coffee with his wife. Consider campaigns targeting couples and promoting shared coffee experiences.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Outdoor Activities, DIY",
+                              "lifestyle": "Outdoor enthusiast, Family-oriented, Budget-conscious",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "74,80,239"
+                            },
+                            {
+                              "customer_marketing_insights": "## Aurore Pereira - Customer Summary\n\n**Customer Profile:** Aurore is a 50-year-old artisan baker living in rural France. She is divorced and has a 23-year-old son. She is active on Facebook and Instagram, sharing her passion for French baking, country living, and glimpses of her life. \n\n**Customer Insights:**\n* **Loyal Coffee Lover:** Aurore is a loyal customer with 62 orders, consistently purchasing our coffee (avg. spend: $17.71). She enjoys French Roast prepared in a French press, even adding a pinch of sea salt to the grounds.\n* **Quality-Driven:** She values quality over price, seeking a premium coffee experience. \n* **Open to Content:** Her engagement with online content suggests she is receptive to marketing efforts that align with her interests (sustainability, DIY projects, French history & culture, baking).\n\n **Marketing Opportunities:**\n* **Highlight Premium Offerings:** Emphasize the quality and unique characteristics of your French Roast, potentially showcasing brewing tips specifically for French presses.\n* **Content Marketing:** Develop content that resonates with her interests - recipes using coffee, pairings with French pastries, sustainable sourcing practices, articles about French history related to coffee, etc. \n* **Social Media Engagement:** Leverage her active presence on Facebook and Instagram to engage with targeted ads and content featuring visually appealing imagery and videos about French baking and rural lifestyle.\n* **Limited-Time Offers:** Appeal to her appreciation for special occasions and family gatherings by promoting limited-edition coffees or bundles around holidays or special events.\n\n**Overall:** Aurore represents a valuable customer segment: a loyal, quality-conscious individual open to engagement and aligned with our brand values.  By crafting personalized marketing strategies that leverage her passions and online behavior, we can strengthen this relationship and drive sales.",
+                              "chocolate_preferences": null,
+                              "interests": "Food",
+                              "lifestyle": "Family-oriented",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "213,11,134"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "The target audience for Lavender Sea Salt Chocolate is primarily composed of **Gourmet Connoisseurs and Experience Seekers** who are willing to pay a premium for unique, complex, and high-quality flavor profiles.\n\nBased on the product description (rich **dark chocolate**, **aromatic lavender**, delicate **sea salt**) and customer insights, the potential buyer groups are:\n\n### 1. The Gourmet Connoisseur & Foodie\n\n*   **Profile:** Discerning palates who prioritize quality and complex flavors. They are educated consumers who seek out artisanal and unique food experiences.\n*   **Reasoning:**\n    *   **Dark Chocolate & Sea Salt Preference:** Customer insights show a segment of buyers who actively seek the contrast of salt in their routine (e.g., adding a pinch of sea salt to coffee grounds). This indicates a sophisticated taste that enjoys the balance of sweet, bitter, and salty.\n    *   **Willingness to Pay for Quality:** The \"decadent\" description and premium ingredients appeal to customers who are \"medium spenders\" and \"loyal coffee lovers\" who are willing to invest in quality products.\n*   **Marketing Angle:** Emphasize the origin of the dark chocolate, the delicate balance of the flavor profile, and suggest pairings (e.g., with fine wine or artisanal coffee).\n\n### 2. The Creative & Artisan Customer\n\n*   **Profile:** Individuals with creative, craft-focused, or independent lifestyles (e.g., freelance artisans, bakers, designers, DIY enthusiasts). They value unique ingredients, natural elements, and aesthetically pleasing products.\n*   **Reasoning:**\n    *   **Lavender Appeal:** Lavender is an unconventional, natural, and sophisticated flavor that strongly resonates with customers interested in aromatherapy, natural ingredients, and creative pursuits (like the artisan baker or carpenter mentioned in the data).\n    *   **Aesthetic Alignment:** These buyers are often active on visual platforms (Instagram, Facebook) and are drawn to products that are unique and photograph well.\n*   **Marketing Angle:** Use visually appealing content that highlights the natural beauty of the lavender and the product's handcrafted, artisanal nature. Suggest the chocolate as a sophisticated ingredient for baking or a unique gift.\n\n### 3. The Experience Seeker & Digital Nomad\n\n*   **Profile:** Travelers, digital nomads, and experience-driven customers who are always looking for a unique \"treat\" or souvenir that captures a sense of place or novelty.\n*   **Reasoning:**\n    *   **Novelty and Travel:** The combination of \"Lavender Sea Salt\" is distinctive and memorable. Experience-seekers (who are frequently cited in the data as valuing travel and unique products) are drawn to novel items that stand out from conventional offerings.\n    *   **Premium Indulgence:** This chocolate is an ideal, high-quality, and easy-to-transport indulgence for their \"on-the-go\" lifestyle.\n*   **Marketing Angle:** Position the product as a luxurious, unique treat for travel or a sophisticated snack for a mid-day ritual. Highlight the experience of the taste over basic functionality."
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Identify potential buyers for Salted Caramel Coffee Dreams and explain why."
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "The potential buyers for the **Salted Caramel Coffee Dreams** chocolate are primarily young, socially-active individuals who value premium quality, unique flavor experiences, and convenient indulgence.\n\nHere are the specific target buyer groups, along with the reasoning based on product features and customer insights:\n\n### 1. The Young, Socially-Active Coffee Enthusiast\n\nThis group consists of young adults (Gen Z, typically 18-25) with a strong passion for specialty coffee, active lifestyles, and high engagement on social media.\n\n| Buyer Group | Why This Product Appeals | Reasoning from Customer Data |\n| :--- | :--- | :--- |\n| **Coffee Aficionados** | The product contains a **smooth coffee ganache**, making it an ideal companion to a cup of coffee or a convenient \"coffee fix\" in chocolate form. | Customer insights overwhelmingly show a segment highly interested in **coffee** (espresso, cold brew), quality brewing, and coffee-themed experiences. Profiles like freelance photographers and baristas seek high-quality, flavorful ways to enjoy coffee. |\n| **Gen Z & Active Lifestyles** | The item is a portable, premium snack that delivers both an energy boost and a complex flavor profile, fitting an **on-the-go** lifestyle. | Customers are frequently described as 18-year-old **freelancers, urban explorers, and travelers** who prioritize **convenience** and high-quality products that align with their busy schedules. |\n| **The Trend Seeker** | The combination of coffee, dark chocolate, and the popular salted caramel flavor is highly aesthetic and shareable. | This segment is **highly active on Instagram and TikTok** and is receptive to marketing focused on visually appealing, trendy products that reflect an aspirational and indulgent lifestyle. |\n\n***\n\n### 2. The Indulgent Sweet & Savory Craver\n\nThis group is motivated by the balanced, multi-textural experience of sweet, salty, and bitter flavors in a premium format.\n\n| Buyer Group | Why This Product Appeals | Reasoning from Customer Data |\n| :--- | :--- | :--- |\n| **The Flavor Explorer** | The product offers a complex flavor profile: the bitterness of **dark chocolate**, the sweetness of **caramel**, the savory crunch of **pretzel pieces** (salty), and the distinct flavor of **coffee**. | This customer group is willing to pay a premium for a **\"symphony of textures and flavors\"** and is noted to value quality and experience over budget. The combination satisfies the popular demand for salty-sweet balance. |\n| **Premium Indulgence Seekers** | Priced as a premium treat, this chocolate is an \"affordable luxury\" for someone looking to reward themselves with a high-quality product. | The insights indicate many customers are **moderate to medium spenders** who buy products for **special occasions or as rewards**, suggesting they are motivated by quality and the experience of indulgence. |"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "salted_caramel_coffee",
+      "agent_data": {
+        "agents": {
+          "target_audience_identifier": {
+            "agent_id": "target_audience_identifier",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "\nYou are the Target Audience Identifier agent for Chocolate AI. \nYour goal is to identify potential buyer groups for specific chocolate products using data from BigQuery.\n\nFollow these steps:\n1. When a user asks about a product, use the `get_product_details` tool to find its description and price.\n2. Extract key flavor profiles, ingredients, or categories from the product details (e.g., 'dark chocolate', 'sea salt', 'organic').\n3. Use the `get_customer_insights` tool with these keywords to find relevant customer segments and marketing insights from the `customer_360` table.\n4. Synthesize the findings and output a list of potential buyer groups.\n5. For each buyer group, provide a clear reasoning based on the customer insights and product details.\n\nSafety Rules:\n- Never disclose PII (Personal Identifiable Information) like customer names or IDs.\n- Only provide segment-level insights and general demographic reasoning.\n- Focus exclusively on target audience identification for chocolate products.\n",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves chocolate product details from the menu based on a search string.\n\nArgs:\n    product_search: Name or description of the product to search for.",
+                    "name": "get_product_details",
+                    "parameters": {
+                      "properties": {
+                        "product_search": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "product_search"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves customer segments and marketing insights based on flavor preferences or product types.\n\nArgs:\n    preferences: A list of keywords like ['dark chocolate', 'sea salt', 'almonds'].",
+                    "name": "get_customer_insights",
+                    "parameters": {
+                      "properties": {
+                        "preferences": {
+                          "items": {
+                            "type": "STRING"
+                          },
+                          "type": "ARRAY"
+                        }
+                      },
+                      "required": [
+                        "preferences"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-ac4bb81c-4f83-4294-be3a-046b5f4c3c90",
+                        "args": {
+                          "product_search": "Salted Caramel Coffee Dreams"
+                        },
+                        "name": "get_product_details"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-ac4bb81c-4f83-4294-be3a-046b5f4c3c90",
+                        "name": "get_product_details",
+                        "response": {
+                          "result": [
+                            {
+                              "menu_id": 30,
+                              "menu_name": "Salted Caramel Coffee Dreams",
+                              "menu_description": "A symphony of textures and flavors! Smooth coffee ganache meets crunchy pretzel pieces, all coated in luxurious dark chocolate.",
+                              "menu_price": 6.5
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-1cdc2e01-3364-4af7-90f7-4650a6dec997",
+                        "args": {
+                          "preferences": [
+                            "coffee",
+                            "dark chocolate",
+                            "salty",
+                            "caramel"
+                          ]
+                        },
+                        "name": "get_customer_insights"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-1cdc2e01-3364-4af7-90f7-4650a6dec997",
+                        "name": "get_customer_insights",
+                        "response": {
+                          "result": [
+                            {
+                              "customer_marketing_insights": "Rico is an 18 year old, single, male Teacher's Assistant. He is tech-savvy and active on social media, particularly Instagram, TikTok, and Facebook. He is passionate about football, gaming, travel, and coding. He is also interested in coffee and enjoys trying different types, especially Cortado, Espresso, and Cold Brew. \n\nRico is a medium spender at our coffee shop with a total spending of $3635.12 across 69 orders, averaging ~$23 per order. He frequently visits in the weekends and for special occasions to meet friends. He is a repeat customer, placing multiple orders and trying various menu items, including items 55, 34, and 56.  He is very engaged with our online content, especially those related to coffee. He also clicks on our email promotions for local coffee shops and watches videos about coffee brewing techniques.  \n\nAs a marketing analyst, you can leverage Rico's interests to create personalized marketing campaigns. For example, target him with promotions on new coffee brewing equipment or exclusive discounts at local coffee shops. Content related to his interests, such as football, gaming, or travel, can also be used to attract his attention. Given his social media engagement, running targeted ads on those platforms would be an effective way to reach him. His high engagement with online content suggests that he is receptive to online marketing efforts. ",
+                              "chocolate_preferences": null,
+                              "interests": "Technology",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "55,34,56"
+                            },
+                            {
+                              "customer_marketing_insights": "Sylvie is an 18 year old freelance photographer and coffee enthusiast, based in San Jose, California. She is passionate about travel, photography, and sustainable living, currently exploring Europe. Sylvie is active on social media, particularly Instagram and TikTok, where she shares her experiences with her followers. Sylvie is a repeat customer and moderate spender at our company, primarily purchasing our products when traveling or meeting friends. She values quality and experience, and is willing to pay for premium products. Based on her interests and online activity, target her with marketing campaigns related to: 1. Sustainable and ethically sourced coffee 2. Travel-themed coffee blends, especially those inspired by European flavors 3. Promotions and giveaways centered around travel photography 4. Content featuring European coffee culture  Sylvie is likely to respond well to visually appealing content that aligns with her adventurous and independent lifestyle. Since she is active on Instagram and TikTok, prioritize video content showcasing the unique selling points of your products.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Sustainable Living, European Street Food, Coffee",
+                              "lifestyle": "Adventurous, Independent, Curious",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "11,194,5"
+                            },
+                            {
+                              "customer_marketing_insights": "This 18-year-old London-based barista is a loyal customer with a high lifetime value, having spent over \\$4750 on 74 orders. They are an active Instagram user (@june.jones.photography), where they share their passion for photography and coffee.  They value quality coffee and enjoy the ritual of brewing at home, especially in the morning.  They are a frequent visitor, heavy user, and loyal customer, primarily driven by the quality of our products. While they haven't left a negative review, their latest sentiment was neutral, suggesting we should monitor their satisfaction closely.  They are likely interested in exploring new coffee options, special promotions, and loyalty programs tailored to their preferences. Consider targeting them with visually appealing content showcasing new coffee blends, brewing equipment, or exclusive experiences like barista workshops. Leverage their Instagram engagement for potential UGC opportunities by encouraging them to share photos with our products.",
+                              "chocolate_preferences": null,
+                              "interests": "Photography",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "107,129,136"
+                            },
+                            {
+                              "customer_marketing_insights": "Thibaut Leroy is an 18-year-old freelance photography assistant who embodies the spirit of a true coffee enthusiast and a digitally savvy, adventurous Gen Z individual. He actively engages with our brand across multiple social media platforms, especially Instagram and TikTok, where he boasts a considerable following.  He is considered a loyal customer and a medium spender who frequently purchases our products, showing a preference for high-quality coffee and unique brewing methods. He often purchases our products for special occasions or as gifts, aligning with his aspirational lifestyle as a travel and photography enthusiast.  Given his social media presence and engagement, influencer marketing campaigns centered around travel and photography could effectively resonate with Thibaut and similar customer profiles. Additionally, promoting premium coffee selections, brewing equipment, and exclusive travel-themed coffee blends would pique his interest.  ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "234,96,41"
+                            },
+                            {
+                              "customer_marketing_insights": "Customer 3838 is an 18 year old single Motorcycle Mechanic living in San Jose. They are an active social media user, engaging frequently on Facebook, Instagram, and TikTok, where they share their passion for motorcycles, travel, and coffee.  \\n\\nThis customer is a frequent buyer, averaging $20.75 per order and a total spend of $3340.08 over 75 orders.  They prefer quality coffee and frequently purchase coffee even though they submitted a negative review on their last order, indicating they are at risk of churning. \\n\\nTo best market to this customer, leverage their social media presence by showing how your coffee products can fuel their adventures and be conveniently enjoyed on the go. Highlight the quality and taste of your coffee and showcase how it aligns with their lifestyle values, such as self-direction and openness to new experiences. Consider offering exclusive discounts or promotions to re-engage them and mitigate their churn risk. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "39,100,31"
+                            },
+                            {
+                              "customer_marketing_insights": "Pauline Lenoir is an 18-year-old freelance social media manager and high school graduate residing in San Jose, California. She actively uses social media, especially Instagram, TikTok, Twitter, and Facebook. She enjoys fashion, music, travel, photography, and exploring new coffee experiences. Pauline is a moderate spender and frequently purchases our products; however, her review sentiment is mixed with a 50% positive and a 50% negative review rate. It's crucial to understand the reasons behind the negative reviews to improve her satisfaction and foster brand loyalty.  She values convenience and enjoys high-quality coffee, finding our product a good fit for her on-the-go lifestyle. As a Gen Z customer, targeting her with visually appealing content showcasing the product's convenience, trendy appeal, and alignment with her lifestyle would resonate effectively.  Highlighting promotions, discounts, or loyalty programs could incentivize her to purchase more frequently. Engaging with her on social media, particularly through interactive contests or giveaways related to travel, fashion, or music, could enhance brand engagement and encourage positive reviews.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Social",
+                              "motivations": "Extrinsic",
+                              "top_3_favorite_menu_items": "151,55,18"
+                            },
+                            {
+                              "customer_marketing_insights": "Pina is an 18-year-old freelance virtual assistant and a loyal customer classified as a Medium Spender and Moderate User. She is active on various social media platforms, including Instagram, Facebook, TikTok, and Twitter. Pina is passionate about photography, travel, and coffee, often sharing content related to these interests. She is  highly engaged with our brand, frequently clicking on promotional emails and watching barista tutorials, demonstrating a keen interest in coffee and our brand. She is particularly interested in high-quality, convenient coffee options like Espresso, Macchiato, and Lavazza Super Crema, likely due to her busy lifestyle and preference for quick and easy solutions. Pina is an ideal target for marketing campaigns promoting premium coffee products, convenient online ordering options, and travel-related promotions. Her social media engagement presents an opportunity to leverage user-generated content and influencer marketing strategies.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Coffee brewing, History, Cycling",
+                              "lifestyle": "Creative, Adventurous, Independent",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "77,239,45"
+                            },
+                            {
+                              "customer_marketing_insights": "Arnaud Jacques is an 18-year-old, single, high school graduate living in Paris, France.  He is a freelance photographer's assistant and identifies as an urban explorer and aspiring photographer. He is passionate about street art, photography, sustainable living, and coffee, frequently posting about his experiences on social media platforms like Instagram and TikTok.  Arnaud is an active social media user, frequently engaging with content related to his interests.  \n\nArnaud is a medium spender at our coffee shop and an active, repeat customer, indicating his loyalty to our brand. He frequently purchases coffee on weekends and special occasions, often while traveling, showcasing a consistent need for his caffeine fix. His favorite menu items are numbers 22, 12, and 98, highlighting potential avenues for targeted promotions. Notably, Arnaud seeks quality coffee and prioritizes convenience due to his busy, on-the-go lifestyle.   \n\nTo effectively target Arnaud, marketing campaigns should:\n\n* **Highlight the high quality of our coffee beans and brewing methods, emphasizing the superior taste and experience we offer.** \n* **Promote our convenient coffee options, such as mobile ordering, quick pick-up locations, or special travel mugs, directly addressing his need for a quick caffeine fix while on the go.**\n* **Showcase the aesthetic appeal of our coffee and coffee shops on visual platforms like Instagram, aligning with his interest in photography and street art.  Consider featuring user-generated content of our coffee in visually appealing urban settings.  **\n* **Leverage Arnaud's interest in sustainable living by highlighting our company's commitment to ethical sourcing and sustainability practices.  **\n* **Explore potential partnerships with local photography or street art events in Paris to further engage with his interests and foster a sense of community.  **\n\nBy understanding Arnaud's lifestyle, interests, and coffee preferences, we can craft personalized marketing campaigns that resonate with him and effectively promote our products. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Urban Explorer",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "22,12,98"
+                            },
+                            {
+                              "customer_marketing_insights": "Thibaut Michel is an 18-year-old freelance handyman and recent high school graduate residing in San Jose. He is passionate about photography, urban gardening, DIY projects, sustainable living, and coffee brewing. As a Gen Z customer, he is active on various social media platforms like Instagram, TikTok, Facebook, and Twitter. He frequently engages with content related to DIY, home improvement, sustainable living, and urban gardening. Thibaut is a repeat customer who makes medium-level purchases. He primarily buys coffee for himself, indulging in occasional specialty beans, but his work as a handyman requires him to buy in bulk for his crew. He prioritizes quality and convenience, seeking quick and convenient coffee options without compromising on quality. He is value-driven and willing to spend a reasonable amount for products that align with his values.  Marketing efforts should emphasize high-quality coffee options convenient for on-the-go consumption. Highlighting bulk discounts and the sustainable practices of the brand would resonate with his values and work needs. Using his social media engagement, incorporating visually appealing content showcasing the use of coffee in his daily routines, particularly during his early morning work routine, would be effective.  Moreover, aligning marketing campaigns with his interests in photography, urban gardening, and DIY projects could enhance engagement.",
+                              "chocolate_preferences": null,
+                              "interests": "Photography, Outdoor Activities",
+                              "lifestyle": "Active, Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "238,90,211"
+                            },
+                            {
+                              "customer_marketing_insights": "Guillaume is an 18-year-old freelance photographer and high school graduate living in France. He fits the \"Generation Z\" demographic and is active on Instagram (@guillaume.bonneau.photography) where he shares his photography and passion for sustainable living. He's a coffee enthusiast who enjoys Ethiopian Yirgacheffe brewed using a French Press, typically mid-morning. Guillaume is a repeat customer and has placed multiple orders, trying a variety of our coffee. He typically spends a medium amount and is driven by quality, sustainability, and experience. He is interested in discovering new coffee flavors and finding quality coffee on the go. He is active on Instagram, interested in travel photography and sustainable living, and enjoys video essays on philosophy.  Highlighting his appreciation for sustainability and travel when marketing to him could be beneficial. Given his age and interest in convenient, quality coffee, consider targeting him with promotions for ready-to-drink cold brew options or travel-friendly brewing equipment.",
+                              "chocolate_preferences": null,
+                              "interests": "Photography, Sustainable Living, Travel, Philosophy, Cycling",
+                              "lifestyle": "Minimalist, Creative, Curious",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "236,231,192"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "The potential buyers for the **Salted Caramel Coffee Dreams** chocolate are primarily young, socially-active individuals who value premium quality, unique flavor experiences, and convenient indulgence.\n\nHere are the specific target buyer groups, along with the reasoning based on product features and customer insights:\n\n### 1. The Young, Socially-Active Coffee Enthusiast\n\nThis group consists of young adults (Gen Z, typically 18-25) with a strong passion for specialty coffee, active lifestyles, and high engagement on social media.\n\n| Buyer Group | Why This Product Appeals | Reasoning from Customer Data |\n| :--- | :--- | :--- |\n| **Coffee Aficionados** | The product contains a **smooth coffee ganache**, making it an ideal companion to a cup of coffee or a convenient \"coffee fix\" in chocolate form. | Customer insights overwhelmingly show a segment highly interested in **coffee** (espresso, cold brew), quality brewing, and coffee-themed experiences. Profiles like freelance photographers and baristas seek high-quality, flavorful ways to enjoy coffee. |\n| **Gen Z & Active Lifestyles** | The item is a portable, premium snack that delivers both an energy boost and a complex flavor profile, fitting an **on-the-go** lifestyle. | Customers are frequently described as 18-year-old **freelancers, urban explorers, and travelers** who prioritize **convenience** and high-quality products that align with their busy schedules. |\n| **The Trend Seeker** | The combination of coffee, dark chocolate, and the popular salted caramel flavor is highly aesthetic and shareable. | This segment is **highly active on Instagram and TikTok** and is receptive to marketing focused on visually appealing, trendy products that reflect an aspirational and indulgent lifestyle. |\n\n***\n\n### 2. The Indulgent Sweet & Savory Craver\n\nThis group is motivated by the balanced, multi-textural experience of sweet, salty, and bitter flavors in a premium format.\n\n| Buyer Group | Why This Product Appeals | Reasoning from Customer Data |\n| :--- | :--- | :--- |\n| **The Flavor Explorer** | The product offers a complex flavor profile: the bitterness of **dark chocolate**, the sweetness of **caramel**, the savory crunch of **pretzel pieces** (salty), and the distinct flavor of **coffee**. | This customer group is willing to pay a premium for a **\"symphony of textures and flavors\"** and is noted to value quality and experience over budget. The combination satisfies the popular demand for salty-sweet balance. |\n| **Premium Indulgence Seekers** | Priced as a premium treat, this chocolate is an \"affordable luxury\" for someone looking to reward themselves with a high-quality product. | The insights indicate many customers are **moderate to medium spenders** who buy products for **special occasions or as rewards**, suggesting they are motivated by quality and the experience of indulgence. |"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "What are the target segments for the Parisian Chocolate Easter Egg?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "The Parisian Chocolate Easter Egg is positioned as a premium, seasonal, and gourmet item, indicated by its $24.99 price point, its \"Parisian\" branding, and its sophisticated filling of truffles.\n\nBased on customer insights from the product's flavor profile (dark chocolate, truffles) and its use case (gifting/seasonal), the following target segments have been identified:\n\n### 1. The Discerning Gifter (Seasonal & Special Occasion Buyers)\n\nThis segment includes customers who are primarily looking for high-quality, pre-packaged gifts for holidays and special occasions.\n\n*   **Key Characteristics:** Medium to high spenders who explicitly mention purchasing products for \"gifting purposes,\" \"holidays,\" or \"special occasions.\" They are focused on presentation and the perceived value of the gift.\n*   **Product Fit Reasoning:** The Easter Egg is a quintessential seasonal gift. Its premium price and the inclusion of high-value truffles make it a perfect option for a thoughtful, luxurious present. Customer data shows a strong correlation between high-spending loyal customers and frequent gifting behavior.\n\n### 2. The Gourmet Connoisseur (The Premium Consumer)\n\nThis segment consists of individuals who prioritize product quality, unique ingredients, and sophisticated flavor combinations over cost.\n\n*   **Key Characteristics:** Customers who are \"willing to spend a little extra to get it\" and value \"quality above all else.\" They are drawn to complex profiles, such as the blend of dark and white chocolate and the truffle filling.\n*   **Product Fit Reasoning:** The sophisticated \"dark and white chocolate\" blend and the high-end \"truffle\" filling appeal directly to this segment. They view the purchase as an indulgence or a treat for themselves, justifying the premium price for the gourmet experience.\n\n### 3. The Aesthetically-Driven Consumer (Creative & Culturally Interested)\n\nThis segment is motivated by visual appeal, cultural themes, and unique branding that aligns with their creative and independent lifestyles.\n\n*   **Key Characteristics:** Often creative professionals (e.g., designers, photographers, artists) who value \"visually appealing content\" and are interested in \"European culture\" or \"travel.\" They see the product as a decorative or experiential item.\n*   **Product Fit Reasoning:** The name \"Parisian Chocolate Easter Egg\" capitalizes on the association with European luxury and artistry. This segment is drawn to the visual appeal of an ornate egg and the implied sophistication of French confectionery, making it an attractive purchase for display or high-end social sharing."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "parisian_easter_egg",
+      "agent_data": {
+        "agents": {
+          "target_audience_identifier": {
+            "agent_id": "target_audience_identifier",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "\nYou are the Target Audience Identifier agent for Chocolate AI. \nYour goal is to identify potential buyer groups for specific chocolate products using data from BigQuery.\n\nFollow these steps:\n1. When a user asks about a product, use the `get_product_details` tool to find its description and price.\n2. Extract key flavor profiles, ingredients, or categories from the product details (e.g., 'dark chocolate', 'sea salt', 'organic').\n3. Use the `get_customer_insights` tool with these keywords to find relevant customer segments and marketing insights from the `customer_360` table.\n4. Synthesize the findings and output a list of potential buyer groups.\n5. For each buyer group, provide a clear reasoning based on the customer insights and product details.\n\nSafety Rules:\n- Never disclose PII (Personal Identifiable Information) like customer names or IDs.\n- Only provide segment-level insights and general demographic reasoning.\n- Focus exclusively on target audience identification for chocolate products.\n",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves chocolate product details from the menu based on a search string.\n\nArgs:\n    product_search: Name or description of the product to search for.",
+                    "name": "get_product_details",
+                    "parameters": {
+                      "properties": {
+                        "product_search": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "product_search"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves customer segments and marketing insights based on flavor preferences or product types.\n\nArgs:\n    preferences: A list of keywords like ['dark chocolate', 'sea salt', 'almonds'].",
+                    "name": "get_customer_insights",
+                    "parameters": {
+                      "properties": {
+                        "preferences": {
+                          "items": {
+                            "type": "STRING"
+                          },
+                          "type": "ARRAY"
+                        }
+                      },
+                      "required": [
+                        "preferences"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-4447efc6-0a39-4bba-b96b-5de86effefac",
+                        "args": {
+                          "product_search": "Parisian Chocolate Easter Egg"
+                        },
+                        "name": "get_product_details"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-4447efc6-0a39-4bba-b96b-5de86effefac",
+                        "name": "get_product_details",
+                        "response": {
+                          "result": [
+                            {
+                              "menu_id": 124,
+                              "menu_name": "Parisian Chocolate Easter Egg",
+                              "menu_description": "A blend of dark and white chocolate formed into a hollow egg. Filled with a variety or truffles.",
+                              "menu_price": 24.99
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-8a3d27c5-bc12-432b-a811-ba293152a3ab",
+                        "args": {
+                          "preferences": [
+                            "dark chocolate",
+                            "white chocolate",
+                            "truffles",
+                            "gifting"
+                          ]
+                        },
+                        "name": "get_customer_insights"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-8a3d27c5-bc12-432b-a811-ba293152a3ab",
+                        "name": "get_customer_insights",
+                        "response": {
+                          "result": [
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst (ID: 2623)\n\n**This 19-year-old freelance photographer from Paris embodies the adventurous, aesthetically-driven Gen Z demographic.** He is an active social media user (Facebook, Instagram, Twitter, TikTok) and a self-proclaimed \"coffee enthusiast.\" He seeks quality in his purchases and is willing to spend for it, fitting the \"Medium Spender, Repeat Buyer\" segment.\n\n**Key takeaways:**\n\n* **Passionate about photography, travel, and coffee:** These interests are prominent across his social media and reflected in his content interactions and lifestyle (\"Creative, Inquisitive, Independent\").\n* **Loyal customer with a high average spend:**  He has placed 66 orders, spends an average of $21.22 per order, and leaves positive reviews. This indicates high satisfaction and potential for future engagement.\n* **Values quality and variety in his coffee:** He enjoys a range of specialty coffee drinks and brewing methods, suggesting openness to new products and experiences. \n* **Frequently shares coffee-related content:**  Leveraging his social media engagement for targeted campaigns and influencer marketing could be highly effective.\n* **Open to international shipping and gifting:**  Highlighting unique offerings and promotions related to travel and gifting aligns with his purchasing habits.\n\n**Marketing recommendations:**\n\n* **Showcase visually appealing content:** High-quality images and videos focusing on travel, lifestyle, and coffee experiences will resonate with his interests.\n* **Emphasize product quality and origin:** Highlight ethically sourced beans, unique brewing methods, and the story behind each cup.\n* **Offer exclusive discounts and promotions:** Target him with special offers on new coffee releases, travel-themed bundles, and gift sets.\n* **Explore influencer marketing opportunities:** Leverage his active social media presence and genuine passion for coffee to reach a wider audience within his niche.\n* **Personalize communication and recommendations:**  Use data on his favorite menu items and purchase history to suggest new products he might enjoy.  \n",
+                              "chocolate_preferences": null,
+                              "interests": "Photography, Travel, Coffee, Music, Art",
+                              "lifestyle": "Creative, Inquisitive, Independent",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "64,202,18"
+                            },
+                            {
+                              "customer_marketing_insights": "Sophie Bouvet is a 19-year-old carpentry apprentice living in France. She is passionate about craftsmanship, coffee, and photography, and her lifestyle reflects her creative and environmentally conscious values. As a loyal customer with an average spend of $23.84 per order, she frequents the platform to explore and purchase strong, dark roast coffees, especially favoring single-origin Ethiopian Yirgacheffe or Kenyan AA.  Sophie actively engages with content related to her interests, particularly DIY projects, sustainable living, and travel. She is active on Instagram and Facebook, where she showcases her carpentry projects and shares her passion for coffee. \n\nMarketing efforts should emphasize: \n\n* **High-quality, ethically sourced coffee beans:** Highlight the origin, roasting process, and sustainability initiatives related to the coffee. \n* **Unique coffee blends and brewing equipment:**  Offer exclusive discounts or bundles featuring new coffee origins or brewing equipment for dark roasts. \n* **Content marketing aligned with her interests:** Share blog posts, videos, or social media content about DIY projects using coffee byproducts, sustainable living tips from coffee-growing regions, or travel photography featuring picturesque cafes around the world. \n* **Engaging her on social media:** Organize contests or campaigns encouraging users to share photos of their coffee setups or DIY creations, offering her a platform to showcase her work and connect with like-minded individuals. \n* **Leveraging her loyalty:** Offer a referral program to reward her for recommending the platform to friends and family, knowing her coffee gifting habits.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Food",
+                              "lifestyle": "Creative, Environmentally conscious",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "58,12,89"
+                            },
+                            {
+                              "customer_marketing_insights": "Cristina is a 23 year old, single, freelance translator based in San Jose with high engagement across her social media platforms, especially Instagram (Cristina_Garibaldi_Travels) where she posts about her passion for travel and coffee. She is a medium spender at our store and primarily purchases for special occasions, when travelling, and for gifting purposes. Cristina is very interested in the quality of her coffee and enjoys trying new things as evidenced by her diverse coffee preferences (Espresso, Macchiato, Cold Brew) and her positive engagement with our coffee-related content and email promotions. She values quality above all else and is willing to spend a little extra to get it. Therefore, highlighting new and unique coffee blends, especially those with interesting origin stories that tie into her love for travel and photography, will likely resonate with Cristina. Additionally, running promotions around the holidays or partnering with travel and photography brands for cross-promotional campaigns may lead to increased customer lifetime value. Focus on showcasing the quality and story behind your coffee to capture her attention and potentially convert her into a loyal advocate.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Adventurous",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "93,39,59"
+                            },
+                            {
+                              "customer_marketing_insights": "Customer 3236 is a 24-year-old, single, self-employed carpenter based in rural France. He's a repeat customer and a medium spender, having placed 71 orders with an average spend of $20.61. He is interested in quality and experience and is willing to pay for it. \n\nHe actively engages with our content, particularly those related to travel and photography, sustainable living, and minimalist design. He is a mobile user and enjoys discovering new coffee flavors. \n\nConnect with him through his active social media accounts on Instagram (@GuyGerard_Woodcraft) and Facebook (@Guy.Gerard.Artisan) showcasing his woodworking projects and passion for photography and travel. Leverage his interests in sustainable living and minimalist design to highlight our commitment to ethical sourcing and aesthetically pleasing packaging. Since he primarily buys coffee for special occasions and when meeting friends, tailor promotions around gifting and shared experiences. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Sustainable Living, Minimalist Design, Woodworking",
+                              "lifestyle": "Creative, Independent, Outdoorsy",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "45,60,11"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst:\n\n**Customer 2624** is a **loyal, high-spending customer** with a strong affinity for quality coffee and unique experiences. As a 24-year-old primary school teacher in London, Rosemary leads a balanced, curious, and creative lifestyle.  She is highly engaged with our brand, frequently visiting our shops, especially on weekends and special occasions, to purchase her favorite coffee drinks and discover new flavors. \n\n**Key characteristics & selling points:**\n\n* **Passion for Quality Coffee:**  Rosemary is an active coffee enthusiast, favoring Ethiopian Yirgacheffe pour-over and oat latte. She enjoys exploring local roasters and gifting coffee beans, indicating a willingness to spend on premium products.\n* **Digital Savvy & Engaged:**  Highly active on Facebook and Instagram, Rosemary follows artisan coffee roasters and engages with brewing tutorials. Leverage social media platforms for targeted marketing campaigns showcasing unique coffee origins, brewing techniques, and limited-time offers.\n* **Values Experiences & Education:**  Rosemary is drawn to educational content and seeks opportunities to expand her knowledge. Highlighting the sourcing, roasting process, and stories behind the coffee can resonate with her.\n* **Community-Oriented:**  She enjoys connecting with others, evidenced by her active social media presence and profession as a teacher. Promote events or campaigns that foster a sense of community among coffee lovers, such as workshops, tastings, or collaborations with local artisans.\n* **Gifting Behavior:**  Leverage her gifting habits by offering special promotions on gift sets or limited-edition coffee beans during holidays or special occasions.\n\n**Messaging should emphasize:**\n\n* **Quality and Origin:** Emphasize the superior quality of the coffee beans, unique origins, and ethical sourcing practices.\n* **Discovery & Exclusivity:**  Highlight limited-time offerings, single-origin options, and exclusive brewing methods to pique her curiosity.\n* **Community & Connection:**  Showcase the brand's commitment to social responsibility and create opportunities for customers to connect with coffee lovers.\n* **Personalized Recommendations:** Tailor recommendations based on her purchase history, such as suggesting new coffee origins based on her favorite Ethiopian Yirgacheffe.",
+                              "chocolate_preferences": null,
+                              "interests": "Food, Travel, Education, Reading",
+                              "lifestyle": "Balanced, Curious, Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "244,15,159"
+                            },
+                            {
+                              "customer_marketing_insights": "Isa is a 28-year-old freelance graphic designer and ceramic artist based in Spain. She embodies a creative, independent, and adventurous lifestyle, actively sharing her passions for ceramics, travel, and sustainable living on social media platforms like Instagram, Facebook, and Twitter.  Isa is a loyal customer with a high purchase frequency and above-average spending. She values quality over price and often purchases our coffee for special occasions, travel, and gifts. Her preferred brewing method is the specialty pour-over, with a fondness for Ethiopian Yirgacheffe.  To effectively market to Isa, we should consider highlighting the sustainable and ethical sourcing of our coffee beans. Showcasing the versatility of our coffee for various occasions, travel, and gifting would resonate with her buying habits. Additionally, content featuring visually appealing brewing tutorials, especially the pour-over method, could further pique her interest.  Given her engagement with travel photography and pottery, collaborations with travel photographers or ceramic artists could effectively capture her attention.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Fashion, Art",
+                              "lifestyle": "Creative, Independent, Adventurous",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "184,87,88"
+                            },
+                            {
+                              "customer_marketing_insights": "Katherine is a 29 year old freelance carpenter from Switzerland who is passionate about woodworking, photography, hiking, coffee brewing, and travel. She is active on social media, particularly Instagram and Twitter, where she showcases her work and shares her experiences. As a coffee enthusiast, she prefers Ethiopian Yirgacheffe, enjoys Chemex brewing, and usually drinks coffee mid-morning.  She is a repeat customer and has spent a total of $3616.32 at our store, with an average spend of $22.46 per order. She is considered a medium spender and primarily buys our products for special occasions, meeting friends, or as vacation souvenirs. She is value-driven, willing to pay a premium for quality and has given positive feedback on her previous purchases.  Marketing Strategy: Emphasize the quality and unique origins of our coffee beans, highlighting Ethiopian Yirgacheffe.  Showcase the versatility of our products for special occasions, gifting, or personal use. Feature user-generated content, especially related to travel and photography, to resonate with her interests. Consider collaborating with her on social media, given her active engagement and positive sentiment towards our brand. Offer brewing tips and tricks, as she has previously shown interest in learning more about coffee brewing.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "8,135,208"
+                            },
+                            {
+                              "customer_marketing_insights": "**Customer Summary for Marketing Analyst**\n\n**Customer ID:** 3150\n\n**Key Highlights:**\n\n* **Coffee-loving Londoner:** Lauren is a single, 30-year-old freelance dog walker and food delivery driver based in London. She's an active social media user with a passion for coffee, her dog, and photography. Her online presence suggests a vibrant, social lifestyle. \n\n* **Engaged coffee enthusiast:**  Lauren regularly engages with coffee-related content online and shows interest in brewing equipment, indicating a potential market for premium coffee beans, home brewing equipment, and coffee accessories.  \n\n* **Convenience and quality seeker:**  As a busy urban professional, convenience is key for Lauren. Her need for 'coffee on the go' presents an opportunity to promote mobile ordering, subscription services, and loyalty programs with rewards.\n\n* **Social coffee drinker:** Lauren's coffee consumption often ties into her social life; target her for promotions around social gatherings, weekend specials, and new product launches suited for sharing or gifting.\n\n* **Positive customer experience:** Her past interactions with customer service have been positive, highlighting her receptiveness to a brand that values customer satisfaction. \n\n**Recommendations:**\n\n* **Personalized marketing:** Leverage Lauren's interests – coffee, dogs, photography, and London life – to create personalized campaigns that resonate with her lifestyle. \n\n* **Social media engagement:** Utilize her strong social media presence by engaging with her content and running targeted ads featuring user-generated content and influencer collaborations.  \n\n* **Promote convenience and loyalty:** Highlight mobile ordering options, quick delivery services, and subscription models to cater to her busy schedule. Implement a loyalty program that rewards her repeat business.\n\n* **Content marketing:** Share blog posts, videos, or social media content about coffee origins, brewing tips, or local London coffee spots to further engage her interest in coffee.\n\n* **Community building:**  Organize events or collaborations that resonate with her interests, such as dog-friendly coffee meetups or photography workshops with a coffee theme.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Food, Music, Photography",
+                              "lifestyle": "Social, Active, Urban",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "234,66,34"
+                            },
+                            {
+                              "customer_marketing_insights": "Jovita is a 31-year-old skilled carpenter and furniture restorer based in Spain. She embodies a creative, independent, and adventurous lifestyle, evident in her passion for woodworking, crafting, sustainable living, and exploring her city.  As a coffee enthusiast, she enjoys high-quality, intense, and smoky coffees with notes of dark chocolate and roasted nuts. She buys freshly roasted beans every two weeks and enjoys a cup daily, often sharing with friends in her workshop. \n\nJovita is an active Instagram user (@Jovitas_Crafts_and_Coffee), showcasing her handcrafted creations and coffee-fueled adventures. She is also active on Facebook, engaging with content related to DIY, crafting, sustainable living, travel, and adventure. Her online presence suggests a strong affinity for visually appealing content and storytelling. \n\nAs a repeat customer, Jovita has spent over \\$5000 on 79 orders, reflecting a high customer lifetime value. Her average spend per order is \\$26.39.  She appreciates quality and is a frequent buyer, demonstrating loyalty to brands that align with her values. \n\nMarketing efforts should leverage Jovita's interests to engage her effectively. High-quality visuals showcasing artisanal coffee, brewing equipment, or unique coffee experiences would resonate with her creative and adventurous spirit. Content highlighting the sustainable and ethical sourcing of coffee beans could pique her interest in sustainable living. Collaborations with influencers or artisans in the woodworking or crafting space could further enhance engagement and brand affinity. Since she is an active Instagram user, visual platforms are ideal for reaching her. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "187,11,213"
+                            },
+                            {
+                              "customer_marketing_insights": "Adele Pichon is a 31-year-old freelance photographer based in [City] with a passion for travel, photography, and European culture. As a loyal customer with a high average spend, she presents a significant opportunity for targeted marketing efforts. Adele frequently engages with content related to travel, photography gear, and European experiences, making her receptive to promotions aligned with these interests. Given her \"bohemian\" and \"free-spirited\" lifestyle, messaging should emphasize unique experiences and products that resonate with her independent spirit. As an active Instagram user, visual storytelling through high-quality photography and video content will be crucial to capturing her attention. Highlighting the quality and origin of coffee products, particularly those with a European connection, will likely appeal to her discerning taste and travel aspirations. Her purchase history indicates a preference for special occasions and gifting, suggesting potential for targeted campaigns around holidays or travel seasons.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Bohemian",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "229,18,147"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "The Parisian Chocolate Easter Egg is positioned as a premium, seasonal, and gourmet item, indicated by its $24.99 price point, its \"Parisian\" branding, and its sophisticated filling of truffles.\n\nBased on customer insights from the product's flavor profile (dark chocolate, truffles) and its use case (gifting/seasonal), the following target segments have been identified:\n\n### 1. The Discerning Gifter (Seasonal & Special Occasion Buyers)\n\nThis segment includes customers who are primarily looking for high-quality, pre-packaged gifts for holidays and special occasions.\n\n*   **Key Characteristics:** Medium to high spenders who explicitly mention purchasing products for \"gifting purposes,\" \"holidays,\" or \"special occasions.\" They are focused on presentation and the perceived value of the gift.\n*   **Product Fit Reasoning:** The Easter Egg is a quintessential seasonal gift. Its premium price and the inclusion of high-value truffles make it a perfect option for a thoughtful, luxurious present. Customer data shows a strong correlation between high-spending loyal customers and frequent gifting behavior.\n\n### 2. The Gourmet Connoisseur (The Premium Consumer)\n\nThis segment consists of individuals who prioritize product quality, unique ingredients, and sophisticated flavor combinations over cost.\n\n*   **Key Characteristics:** Customers who are \"willing to spend a little extra to get it\" and value \"quality above all else.\" They are drawn to complex profiles, such as the blend of dark and white chocolate and the truffle filling.\n*   **Product Fit Reasoning:** The sophisticated \"dark and white chocolate\" blend and the high-end \"truffle\" filling appeal directly to this segment. They view the purchase as an indulgence or a treat for themselves, justifying the premium price for the gourmet experience.\n\n### 3. The Aesthetically-Driven Consumer (Creative & Culturally Interested)\n\nThis segment is motivated by visual appeal, cultural themes, and unique branding that aligns with their creative and independent lifestyles.\n\n*   **Key Characteristics:** Often creative professionals (e.g., designers, photographers, artists) who value \"visually appealing content\" and are interested in \"European culture\" or \"travel.\" They see the product as a decorative or experiential item.\n*   **Product Fit Reasoning:** The name \"Parisian Chocolate Easter Egg\" capitalizes on the association with European luxury and artistry. This segment is drawn to the visual appeal of an ornate egg and the implied sophistication of French confectionery, making it an attractive purchase for display or high-end social sharing."
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "I have a new organic 70% dark chocolate bar. Based on our customers, who should we market it to?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "This new **Organic 70% Dark Chocolate Bar** targets a high-value, discerning customer base that prioritizes quality, ethical sourcing, and health benefits.\n\nBased on the customer insights data aligned with \"organic,\" \"dark chocolate,\" and \"70% cacao\" preferences, here are the potential buyer groups you should market to:\n\n---\n\n### **Target Audience Segments**\n\n| Segment Name | Key Characteristics | Reasoning for Targeting |\n| :--- | :--- | :--- |\n| **1. The Eco-Conscious Connoisseur** | Millennials and Gen Z professionals (e.g., environmental writers, consultants) with intrinsic motivation. Highly value sustainability, ethical sourcing, and organic practices. Willing to pay a premium for high quality. | The product's **\"Organic\"** label and the sophistication of **\"70% Dark Chocolate\"** directly satisfy their core values and discerning palate. They view this purchase as an ethical choice, not just a treat. |\n| **2. The Creative & Active Freelancer** | Digital Nomads, Freelance Photographers, Carpenters, and Artisans (e.g., Anne, Jovita). They appreciate craftsmanship, high-quality inputs, and need energy for their creative or active lifestyles. Active on visual platforms like Instagram and TikTok. | Dark chocolate is often viewed as a functional, brain-boosting snack. The product's premium quality aligns with their appreciation for **\"finer things in life,\"** complementing their hands-on and creative routines. |\n| **3. The Health-Focused Optimizer** | Customers who seek balance and high-quality fuel for an active life (e.g., active urban explorers, parkour enthusiasts, cyclists). They look for products that offer health benefits without compromising taste. | **70% Dark Chocolate** is strongly associated with antioxidants and lower sugar content compared to milk chocolate. The **\"Organic\"** certification appeals to their desire for clean, quality ingredients to fuel their demanding, active lifestyles. |\n\n### **Key Marketing Messaging Focus**\n\nTo best engage these audiences, your marketing content should focus on:\n\n1.  **Values Alignment:** Emphasize the **organic certification** and any information about the ethical sourcing of the cacao beans (Fair Trade, direct trade, environmental impact).\n2.  **Quality and Sophistication:** Highlight the **70% cacao content** as a sign of quality, rich flavor, and craftsmanship. Position the bar as a premium product.\n3.  **Functional Benefits:** For the active segments, market the chocolate as a high-quality, natural source of energy and antioxidants for a mid-day boost or post-activity recovery."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "dark_chocolate_generic",
+      "agent_data": {
+        "agents": {
+          "target_audience_identifier": {
+            "agent_id": "target_audience_identifier",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "\nYou are the Target Audience Identifier agent for Chocolate AI. \nYour goal is to identify potential buyer groups for specific chocolate products using data from BigQuery.\n\nFollow these steps:\n1. When a user asks about a product, use the `get_product_details` tool to find its description and price.\n2. Extract key flavor profiles, ingredients, or categories from the product details (e.g., 'dark chocolate', 'sea salt', 'organic').\n3. Use the `get_customer_insights` tool with these keywords to find relevant customer segments and marketing insights from the `customer_360` table.\n4. Synthesize the findings and output a list of potential buyer groups.\n5. For each buyer group, provide a clear reasoning based on the customer insights and product details.\n\nSafety Rules:\n- Never disclose PII (Personal Identifiable Information) like customer names or IDs.\n- Only provide segment-level insights and general demographic reasoning.\n- Focus exclusively on target audience identification for chocolate products.\n",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves chocolate product details from the menu based on a search string.\n\nArgs:\n    product_search: Name or description of the product to search for.",
+                    "name": "get_product_details",
+                    "parameters": {
+                      "properties": {
+                        "product_search": {
+                          "type": "STRING"
+                        }
+                      },
+                      "required": [
+                        "product_search"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Retrieves customer segments and marketing insights based on flavor preferences or product types.\n\nArgs:\n    preferences: A list of keywords like ['dark chocolate', 'sea salt', 'almonds'].",
+                    "name": "get_customer_insights",
+                    "parameters": {
+                      "properties": {
+                        "preferences": {
+                          "items": {
+                            "type": "STRING"
+                          },
+                          "type": "ARRAY"
+                        }
+                      },
+                      "required": [
+                        "preferences"
+                      ],
+                      "type": "OBJECT"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-7186da16-839c-426c-acc6-afd7915fa8b3",
+                        "args": {
+                          "preferences": [
+                            "organic",
+                            "dark chocolate",
+                            "70% cacao"
+                          ]
+                        },
+                        "name": "get_customer_insights"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-7186da16-839c-426c-acc6-afd7915fa8b3",
+                        "name": "get_customer_insights",
+                        "response": {
+                          "result": [
+                            {
+                              "customer_marketing_insights": "This is Franck, a 21-year-old freelance bike messenger based in San Jose. As a Gen Z coffee lover, his adventurous and independent lifestyle heavily influences his consumer behavior.  \n\nFranck is active on Instagram, documenting his budget-friendly travels, showcasing his passion for backpacking and exploring new cultures. He seeks quality coffee that aligns with his active lifestyle. \n\nKey takeaways for marketing:\n* **Highlight convenience and portability of coffee offerings (on-the-go theme tailored to his bike messenger lifestyle).**\n* **Emphasize ethically sourced beans and unique blends, appealing to his appreciation for quality coffee and trying new things.** \n* **Leverage his interest in budget travel by showcasing affordable, high-quality coffee options.** \n* **Engage with him on Instagram, potentially featuring him as a brand ambassador or collaborating on travel-themed campaigns.** \n* **Explore partnerships with local coffee shops along his usual delivery routes.** \n\nGiven his positive engagement on social media and 100% positive review rate,  Franck is a valuable potential advocate for the brand. Targeting him effectively can lead to organic promotion and word-of-mouth marketing within his travel and active lifestyle communities.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "157,138,194"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst - Customer ID: 7037\n\n**This 21-year-old freelance construction worker from San Jose embodies the adventurous spirit of Gen Z.** He's a self-directed, active individual passionate about parkour, urban exploration, and photography. Thierry actively shares his passions on social media, mainly Instagram and TikTok, using hashtags like #parkour, #freerunning, and #coffee.  He is a coffee enthusiast who enjoys high-quality coffee, particularly Ethiopian Yirgacheffe, prepared using a French Press. \n\n**Key characteristics for a targeted marketing strategy:**\n\n* **Active Urban Explorer:** Thierry's interests in parkour, photography, and urban exploration suggest someone constantly on the move,  seeking convenience without sacrificing quality.\n* **Social Media Savvy:**  He actively engages with social media, providing an opportunity to reach him through targeted ads and influencer marketing campaigns.\n* **Quality Coffee Lover:** Thierry's preference for Ethiopian Yirgacheffe and French Press brewing indicates a discerning palate open to premium coffee options.\n* **Weekend Warrior:** He tends to make purchases on weekends and special occasions, suggesting targeted campaigns during these times could be effective.\n* **Positive & Open:**  With a positive online presence and openness to new experiences, Thierry is receptive to engaging content and authentic brand messaging. \n\n**Suggested Marketing Approaches:**\n\n* **Highlight Convenience and Quality:** Emphasize products that offer a quick and superior coffee experience for people on the go, aligning with his fast-paced lifestyle.\n* **Leverage Social Media:** Utilize platforms like Instagram and TikTok to showcase visually appealing content related to parkour, urban exploration, and coffee, integrating the brand organically within his interests.\n* **Collaborate with Micro-Influencers:**  Partner with parkour athletes or urban photographers who resonate with his passions to enhance brand visibility and credibility.\n* **Target Weekend Promotions:**  Launch special offers and campaigns during weekends and special occasions to capitalize on his buying habits.\n* **Content Marketing is Key:**  Develop engaging blog posts, videos, or social media content that explores the intersection of coffee, parkour, and urban exploration. \n\nBy understanding and tapping into Thierry's passions and lifestyle, we can tailor a marketing strategy that resonates with him and drives conversion.",
+                              "chocolate_preferences": null,
+                              "interests": "Sports",
+                              "lifestyle": "Active",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "71,161,164"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst - ID: 4262\n\n**High-Level Overview:**\n\nThis 22-year-old female is a highly engaged, loyal customer and a perfect example of our target demographic. She is a freelance digital marketing consultant, coffee enthusiast, and passionate traveler who embodies the \"digital nomad\" lifestyle. Her purchase behavior and social media activity suggest a strong alignment with our brand values and a willingness to invest in quality products and experiences.\n\n**Key Points for Engagement:**\n\n* **Leverage her passion for travel and unique coffee experiences:** Tailor marketing campaigns around discovering new coffee origins, showcasing brewing methods from different cultures, and highlighting the portability and convenience of enjoying premium coffee on the go. Her frequent travel presents opportunities to promote travel-sized products and destination-specific blends.\n* **Engage her across multiple social media platforms:**  She maintains an active presence on Instagram, TikTok, Twitter, and Facebook, offering diverse channels to reach her with visually compelling content about travel, coffee, and the digital nomad lifestyle. User-generated content campaigns and influencer collaborations would resonate well.\n* **Highlight the “digital nomad” lifestyle:** Emphasize the flexibility, convenience, and quality of our products that cater to remote work and travel. Showcase how our coffee can be seamlessly integrated into her adventurous lifestyle.\n* **Utilize her social influence:**  Her active engagement on social media, coupled with her profession as a digital marketing consultant, makes her a prime candidate for brand partnerships and influencer collaborations. Providing early access to new products or exclusive travel-related content can lead to valuable organic promotion.\n* **Prioritize quality and variety:** Being a \"value-driven\" customer with low price sensitivity, focus on promoting the premium quality, unique origins, and diverse brewing methods that cater to her discerning palate.\n\n**Challenges and Potential Concerns:**\n\n* While her purchase frequency is moderate, focus on converting her to a \"high-frequency\" user by highlighting subscription services or loyalty programs that reward her frequent purchases and offer exclusive benefits.\n \n**Overall:** This customer represents a valuable asset with high growth potential. By tapping into her passions, lifestyle, and social influence, we can cultivate a long-term, mutually beneficial relationship.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Coffee, Photography",
+                              "lifestyle": "Adventurous, Coffee Enthusiast, Digital Nomad",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "116,91,120"
+                            },
+                            {
+                              "customer_marketing_insights": "Hugues is a 25-year-old, single, male bicycle courier living in an urban area. He is a Millennial with a high school diploma.  Hugues is a minimalist and eco-conscious coffee lover who is active on Instagram, Twitter, and Facebook, where he frequently engages with content about sustainable living and minimalist design. He is an active Twitter user where he posts about cycling and sustainable living. He is passively engaged on LinkedIn where he connects with sustainability professionals. Hugues is a repeat customer who is a medium spender and purchases from our business weekly and for special occasions. He is motivated by quality and sustainability and is willing to pay a premium for it. He prefers freshly brewed, high-quality coffee from sustainable sources, especially French Press and Fair Trade Organic Beans. He enjoys his coffee mid-morning and seeks convenience, variety, and quality in his coffee consumption. Consider targeting Hugues with marketing campaigns promoting sustainably sourced, high-quality coffee products that are convenient for on-the-go consumption, such as a new blend of Fair Trade Organic Beans or a portable French Press system. Highlight the ethical sourcing and quality of the products while emphasizing convenience. Using his active engagement on social media, we can target him with visually appealing ads featuring minimalist design and sustainable practices messaging.",
+                              "chocolate_preferences": null,
+                              "interests": "Sustainable Living, Photography, Cycling",
+                              "lifestyle": "Minimalist, Eco-conscious, Coffee Lover",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "190,19,24"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst - Customer ID 1806\n\n**High-Level Overview:** Suzanne is a loyal, high-spending customer and active user who prioritizes quality, sustainability, and ethical consumption. She is a freelance environmental writer with a strong online presence and a passion for sustainable living, travel, and coffee. \n\n**Key Points for Selling:**\n\n* **Highlight sustainable and ethical sourcing practices:**  Suzanne actively seeks out ethical brands and has shown a keen interest in sustainable coffee sourcing. Emphasize the company's commitment to fair trade, organic farming, and environmental responsibility.  \n* **Showcase unique and high-quality coffee offerings:** Appeal to her sophisticated palate by highlighting single-origin coffees, special blends, and brewing methods like the French Press, which she already enjoys.\n* ** Leverage her online presence:**  Suzanne is highly active on social media, particularly Instagram and Twitter, where she engages with content related to sustainability, travel, and coffee. Partner with her for influencer marketing campaigns or collaborations to reach a wider audience interested in ethical and sustainable products.\n* **Offer premium experiences and content:**  Engage Suzanne with exclusive content related to coffee origins, brewing tips, and sustainability initiatives. Invite her to events or offer early access to new products to foster brand loyalty and advocacy.\n* ** Focus on convenience and value-added services:** Highlight offerings like mobile ordering, quick pick-up options, and loyalty programs that cater to her busy lifestyle and preference for convenience without compromising quality.\n\n**Additional Insights:**\n\n*  Suzanne's master's degree in Environmental Science and her professional background suggest she is knowledgeable and passionate about environmental issues, making her receptive to messages aligned with her values.\n*  Her engagement with travel blogs and her interest in wildlife photography suggest a sense of adventure and a desire for unique experiences.  This can be leveraged to promote coffee from different origins or travel-related coffee accessories.\n* Her purchase history indicates she buys coffee for various occasions, from everyday enjoyment to special moments and social gatherings, providing multiple touchpoints for targeted promotions.\n",
+                              "chocolate_preferences": null,
+                              "interests": "Sustainable Living, Travel, Coffee, Wildlife Photography, Hiking",
+                              "lifestyle": "Eco-conscious, Adventurous, Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "31,37,90"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst - Customer ID: 1364\n\n**Anne Bousquet** is a **28-year-old** single female living in the United States. She is an **Antique Furniture Restorer** and describes herself as a **creative, hands-on** individual who appreciates the finer things in life. Anne is active on various social media platforms, especially **Instagram, TikTok, and Facebook**, where she showcases her passion for **antique furniture restoration and baking**. Her content often features **DIY projects and vintage finds**, attracting individuals interested in **home improvement and vintage aesthetics**.  \n\n**Key Characteristics & Interests:**\n* **Passionate about:** Antique furniture restoration, Baking, DIY projects, Flea markets, Vintage finds\n* **Active Social Media User:**  Instagram, TikTok, Facebook\n* **Content Consumption:** DIY & Home Improvement videos, Targeted local business ads\n* **Coffee Preferences:** Strong French Roast, Espresso with milk, Mid-afternoon pick-me-up\n* **Values Quality:** Seeks quality products and is willing to spend a moderate amount for them\n\n**Marketing Opportunities:**\n* **Targeted Social Media Ads:** Leverage her strong social media presence with visually appealing ads featuring vintage or restored items. \n* **Influencer Marketing:** Collaborate with Anne on sponsored content showcasing her restoration process using your brand's products (e.g., coffee breaks with your product).\n* **Content Marketing:** Create blog posts or videos featuring Anne's expertise in antique furniture restoration, incorporating your brand's products subtly (e.g., brewing the perfect cup of coffee while working on a project).\n* **Local Business Partnerships:** Partner with local businesses targeting a similar customer base (vintage shops, flea markets) for cross-promotional opportunities.\n* **Loyalty Program:** Given her repeat customer status and moderate spending habits, offer a loyalty program that rewards her continued purchases.\n\n**Points to Note:**\n* Anne rarely interacts with sponsored content, so any collaboration should feel authentic and organic to her personal brand.\n* Emphasize the quality and craftsmanship of your products to resonate with her appreciation for finer things.\n* Her social media engagement suggests a preference for visually-driven content. \n* Highlight the convenience and quality of your coffee, aligning with her need for a quick and delicious caffeine fix.",
+                              "chocolate_preferences": null,
+                              "interests": "Art",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "154,83,122"
+                            },
+                            {
+                              "customer_marketing_insights": "Noemi is a 29-year-old Carpenter who embodies a sustainable living and adventurous lifestyle. As a loyal customer, she frequently purchases our coffee, showing a preference for fair trade, organic dark roasts, which aligns perfectly with her values.  She actively engages with our brand on Instagram, showcasing her passion for travel photography and sustainable living. Reaching out to her with promotional offers related to these interests, particularly around her frequent purchase occasions (special events, meeting friends, or vacations), would likely resonate. Highlighting the quality and sustainability aspects of our products in our marketing campaigns would further pique her interest. Additionally, considering her expressed desire for brewing tips and positive customer service interactions, offering personalized content and support through our social media platforms could strengthen her brand loyalty and potentially convert her into a brand advocate.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Outdoorsy",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "102,221,154"
+                            },
+                            {
+                              "customer_marketing_insights": "Jovita is a 31-year-old skilled carpenter and furniture restorer based in Spain. She embodies a creative, independent, and adventurous lifestyle, evident in her passion for woodworking, crafting, sustainable living, and exploring her city.  As a coffee enthusiast, she enjoys high-quality, intense, and smoky coffees with notes of dark chocolate and roasted nuts. She buys freshly roasted beans every two weeks and enjoys a cup daily, often sharing with friends in her workshop. \n\nJovita is an active Instagram user (@Jovitas_Crafts_and_Coffee), showcasing her handcrafted creations and coffee-fueled adventures. She is also active on Facebook, engaging with content related to DIY, crafting, sustainable living, travel, and adventure. Her online presence suggests a strong affinity for visually appealing content and storytelling. \n\nAs a repeat customer, Jovita has spent over \\$5000 on 79 orders, reflecting a high customer lifetime value. Her average spend per order is \\$26.39.  She appreciates quality and is a frequent buyer, demonstrating loyalty to brands that align with her values. \n\nMarketing efforts should leverage Jovita's interests to engage her effectively. High-quality visuals showcasing artisanal coffee, brewing equipment, or unique coffee experiences would resonate with her creative and adventurous spirit. Content highlighting the sustainable and ethical sourcing of coffee beans could pique her interest in sustainable living. Collaborations with influencers or artisans in the woodworking or crafting space could further enhance engagement and brand affinity. Since she is an active Instagram user, visual platforms are ideal for reaching her. ",
+                              "chocolate_preferences": null,
+                              "interests": "Travel",
+                              "lifestyle": "Creative",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "187,11,213"
+                            },
+                            {
+                              "customer_marketing_insights": "## Customer Summary for Marketing Analyst:\n\n**Customer 8045 (Julien Voisin) is a high-value, loyal customer highly aligned with our brand values.** He is an environmentally conscious millennial with a passion for sustainability, ethical consumption, and high-quality coffee. He is a frequent buyer with high spending habits, making him a key target for retention and upselling. \n\n**Key Characteristics:**\n* **Sustainability Advocate:** Julien is deeply passionate about sustainability, reflected in his lifestyle, social media engagement, and master's degree in Environmental Science. This aligns perfectly with our brand's focus on ethical sourcing and sustainable practices.\n* **Coffee Connoisseur:** He enjoys high-quality, single-origin coffee and owns a French Press, indicating a preference for a refined coffee experience.\n* **Active Lifestyle:**  He is an avid photographer, hiker, and birdwatcher. This presents an opportunity to promote products aligning with his outdoor pursuits, such as travel mugs or coffee blends promoting conservation efforts. \n* **Socially Conscious:** Julien is active on social media platforms, particularly those emphasizing visual content like Instagram and photography-related groups on Facebook.  He is likely to engage with content highlighting our brand's story, ethical sourcing, and environmental initiatives.\n* **Tech Savvy:** He is comfortable with technology and actively uses various social media platforms. Targeting him through social media campaigns, particularly with high-quality visuals and engaging storytelling, would be effective.\n\n**Marketing Recommendations:**\n* **Tailor Messaging:** Emphasize the sustainability and ethical sourcing of our coffee. Highlight the quality and unique origins of our beans, specifically mentioning single-origin Ethiopian Yirgacheffe.\n* **Content Marketing:** Create content showcasing the intersection of coffee, nature, and sustainable living. Share stories about our farmers, our commitment to fair trade, and our environmental initiatives. Visual content, especially high-quality photography and videos, will resonate strongly.\n* **Social Media Engagement:** Target him with ads and organic content on Instagram, Facebook, and Twitter. Encourage user-generated content by creating hashtag campaigns related to sustainability and coffee.\n* **Partnerships:** Collaborate with brands or organizations aligned with his interests, such as sustainable travel companies or environmental conservation groups. \n* **Loyalty Program:** Leverage his loyalty status by offering exclusive discounts or early access to new products. Consider a referral program that rewards him for recommending our brand to like-minded individuals.\n\nBy focusing on his interests and values, we can foster a strong relationship with Julien and solidify his position as a loyal customer and brand advocate.",
+                              "chocolate_preferences": null,
+                              "interests": "Sustainable Living, Travel, Photography, Nature, Indie Music",
+                              "lifestyle": "Eco-conscious, Creative, Outdoor Enthusiast",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "83,79,70"
+                            },
+                            {
+                              "customer_marketing_insights": "Denise is a loyal customer and active user in her early 30s who frequently engages with our brand online, especially on Instagram, Facebook, and Twitter. She is an advocate for sustainable living and is drawn to our commitment to Fair Trade and organic practices, as evidenced by her purchase of Fair Trade Organic Ethiopian Yirgacheffe coffee and her inquiry about our sourcing. Denise is a freelance photographer and videographer, often traveling for work, particularly in France, a country she's passionate about. Her social media presence reflects her adventurous and creative lifestyle, showcasing her photography and travels. When targeting Denise, emphasize the quality and sustainability of our products. Highlight brewing tips for her French Press, and consider offering promotions on travel-sized coffee products or accessories that align with her on-the-go lifestyle.  Content featuring travel photography, especially related to France or sustainable living, would resonate with her interests. Given her engagement with DIY and upcycling content, partnering with her for a campaign focused on repurposing coffee grounds or packaging could be a good opportunity. She is a valuable customer with a strong alignment to our brand values – cultivate this relationship.",
+                              "chocolate_preferences": null,
+                              "interests": "Travel, Photography, Sustainable Living, Food, Culture",
+                              "lifestyle": "Creative, Adventurous, Socially Conscious",
+                              "motivations": "Intrinsic",
+                              "top_3_favorite_menu_items": "170,136,205"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "target_audience_identifier",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "This new **Organic 70% Dark Chocolate Bar** targets a high-value, discerning customer base that prioritizes quality, ethical sourcing, and health benefits.\n\nBased on the customer insights data aligned with \"organic,\" \"dark chocolate,\" and \"70% cacao\" preferences, here are the potential buyer groups you should market to:\n\n---\n\n### **Target Audience Segments**\n\n| Segment Name | Key Characteristics | Reasoning for Targeting |\n| :--- | :--- | :--- |\n| **1. The Eco-Conscious Connoisseur** | Millennials and Gen Z professionals (e.g., environmental writers, consultants) with intrinsic motivation. Highly value sustainability, ethical sourcing, and organic practices. Willing to pay a premium for high quality. | The product's **\"Organic\"** label and the sophistication of **\"70% Dark Chocolate\"** directly satisfy their core values and discerning palate. They view this purchase as an ethical choice, not just a treat. |\n| **2. The Creative & Active Freelancer** | Digital Nomads, Freelance Photographers, Carpenters, and Artisans (e.g., Anne, Jovita). They appreciate craftsmanship, high-quality inputs, and need energy for their creative or active lifestyles. Active on visual platforms like Instagram and TikTok. | Dark chocolate is often viewed as a functional, brain-boosting snack. The product's premium quality aligns with their appreciation for **\"finer things in life,\"** complementing their hands-on and creative routines. |\n| **3. The Health-Focused Optimizer** | Customers who seek balance and high-quality fuel for an active life (e.g., active urban explorers, parkour enthusiasts, cyclists). They look for products that offer health benefits without compromising taste. | **70% Dark Chocolate** is strongly associated with antioxidants and lower sugar content compared to milk chocolate. The **\"Organic\"** certification appeals to their desire for clean, quality ingredients to fuel their demanding, active lifestyles. |\n\n### **Key Marketing Messaging Focus**\n\nTo best engage these audiences, your marketing content should focus on:\n\n1.  **Values Alignment:** Emphasize the **organic certification** and any information about the ethical sourcing of the cacao beans (Fair Trade, direct trade, environmental impact).\n2.  **Quality and Sophistication:** Highlight the **70% cacao content** as a sign of quality, rich flavor, and craftsmanship. Position the bar as a premium product.\n3.  **Functional Benefits:** For the active segments, market the chocolate as a high-quality, natural source of energy and antioxidants for a mid-day boost or post-activity recovery."
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

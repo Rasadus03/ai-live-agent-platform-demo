@@ -1,0 +1,32 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "lavender_sea_salt",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Who is the target audience for Lavender Sea Salt Chocolate?"}]
+      }
+    },
+    {
+      "eval_case_id": "salted_caramel_coffee",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "Identify potential buyers for Salted Caramel Coffee Dreams and explain why."}]
+      }
+    },
+    {
+      "eval_case_id": "parisian_easter_egg",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "What are the target segments for the Parisian Chocolate Easter Egg?"}]
+      }
+    },
+    {
+      "eval_case_id": "dark_chocolate_generic",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "I have a new organic 70% dark chocolate bar. Based on our customers, who should we market it to?"}]
+      }
+    }
+  ]
+}
