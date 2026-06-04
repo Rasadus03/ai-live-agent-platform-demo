@@ -1,7 +1,7 @@
 # target-audience-identifier
 
 Simple ReAct agent
-Agent generated with `agents-cli` version `0.3.0`
+Agent co-developed with `agents-cli` version `0.3.0`
 
 ## Project Structure
 
