@@ -1,0 +1,10 @@
+google-adk==1.34.3
+#toolbox_core
+google-genai
+google-auth
+google-adk[google-auth-mcp]
+google-adk[mcp]
+a2a-sdk
+a2a-sdk[http-server]
+google-adk[toolbox]
+google-cloud-aiplatform[agent_engines,adk]==1.156.0
